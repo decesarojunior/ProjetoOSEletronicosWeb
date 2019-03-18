@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Exemplos de Escopos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+        <h:form>
+            <h1>
+                <h:outputLabel value="#{controleIndex.ola}"/>
+            </h1>
+             <h1>
+                <h:outputLabel value="#{controleIndex.dataSO.time}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss:SSS"/>
+                </h:outputLabel>
+            </h1>
+             <h:commandLink value="Voltar" action="#{controleNavegacao.volta}"/>
+         </h:form>
+    </h:body>
+</html>

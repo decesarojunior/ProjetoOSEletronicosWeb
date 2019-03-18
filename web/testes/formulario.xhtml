@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Teste de Formulário</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h:form>
+            <h:messages/>
+            <h:panelGrid columns="2">
+                <f:facet name="header">
+                    <h:outputLabel value="Informe os seus dados"/>
+                </f:facet>
+                <f:facet name="footer">
+                    <h:commandButton value="Processar"
+                                     action="#{controleFormulario.processar()}"/>
+                </f:facet>
+                <h:outputLabel value="Nome"/>
+                <h:inputText value="#{controleFormulario.nome}" size="40" maxlength="40"
+                             required="true" requiredMessage="O nome deve ser informado"/>
+                <h:outputLabel value="Função"/>
+                <h:selectOneMenu value="#{controleFormulario.funcao}"  >
+                    <f:selectItem itemValue="Docente" itemLabel="Docente"/>
+                    <f:selectItem itemValue="Discente" itemLabel="Discente"/>
+                    <f:selectItem itemValue="Técnico" itemLabel="Técnico3"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="Ativo"/>
+                <h:selectBooleanCheckbox value="#{controleFormulario.ativo}"/>	                
+            </h:panelGrid>
+          
+        </h:form>
+        
+    </body>
+</html>

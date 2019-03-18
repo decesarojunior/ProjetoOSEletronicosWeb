@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Teste de PrimeFaces com AJAX</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Entrada"/>
+                <p:inputText value="#{controleAjax.entrada}" id="txtEntrada"/>
+                <p:outputLabel value="Saída"/>
+                <p:inputText value="#{controleAjax.saida}" id="txtSaida"/>   
+                <f:facet name="footer">
+                    <p:commandButton value="Processar com Ajax"
+                                      actionListener="#{controleAjax.processar}"
+                                     update="txtSaida txtEntrada" process="txtEntrada"/>                                         
+                </f:facet>                    
+            </p:panelGrid>
+            <h:commandLink value="Voltar" action="#{controleNavegacao.volta}"/>
+        </h:form>
+    </h:body>
+</html>

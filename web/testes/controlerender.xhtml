@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Exemplo de Renderização com PrimeFaces</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid id="grid">
+                <p:commandButton value="Botão 01 executar"
+                                 id="btn01" actionListener="#{controleRender.mudarExibir()}"
+                                 rendered="#{!controleRender.exibir}"
+                                 process="@this"
+                                 update="grid"/>
+                <br/>
+                <p:commandButton value="Botão 02 executar"
+                                 id="btn02" actionListener="#{controleRender.mudarExibir()}"
+                                 rendered="#{controleRender.exibir}"
+                                 process="@this"
+                                 update="grid"/>
+                <br/>                 
+                <h:commandLink value="Voltar" action="#{controleNavegacao.volta}"/>    
+            
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
