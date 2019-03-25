@@ -12,14 +12,14 @@ import javax.faces.context.FacesContext;
  * @author Telmo Junior
  */
 @ManagedBean(name = "controleNavegacao")
-@SessionScoped
+@SessionScoped//existirá durante a seção
 public class ControleNavegacao implements Serializable {
     
-    private final String ajax = "testes/ajax?faces-redirect=true";
+    private final String ajax = "testes/ajax";
+    private final String volta = "/index";
     private final String primefacesajax = "testes/primefacesajax";
     private final String controlerender = "testes/controlerender";
-    private final String escopos = "testes/escopos";
-    private final String volta = "/index?faces-redirect=true";
+    private final String escopos = "testes/escopos";    
     private final String formulario = "testes/formulario";
     
     public ControleNavegacao(){
@@ -27,7 +27,7 @@ public class ControleNavegacao implements Serializable {
     }
 
     public String ajax() {
-        return ajax;
+        return this.ajax;
     }
     
     public String primefacesajax() {

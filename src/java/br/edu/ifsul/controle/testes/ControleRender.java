@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package br.edu.ifsul.controle.testes;
 
 import java.io.Serializable;
