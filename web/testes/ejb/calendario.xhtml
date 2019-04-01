@@ -12,19 +12,19 @@
         <h:form>
             <p:panelGrid columns="2">
                 
-                <p:panelGrid columns="1">
+                <p:panelGrid columns="1" >
                     <f:facet name="header">
                         <h:outputLabel   value="Hora do Servidor"/>
                     </f:facet>
-                    <h:outputLabel   value="#{controleBeanHora.beanHora.dataHoraServidor}"/>       
-                    <h:outputLabel   value="#{controleBeanHora.beanContador.contador}"/>
+                    <h:outputLabel value="#{controlePrincipal.beanHora.data_hora_servidor}"/>       
+                    <h:outputLabel value="#{controlePrincipal.beanAgendador.beanContador.contador}"/>
                 </p:panelGrid>
                 
                 <p:panelGrid columns="1">
                     <f:facet name="header">
                         <h:outputLabel   value="Nome do usuario:"/>
                     </f:facet>
-                    <h:inputText id="txfNomeUsuario"  value="#{controleBeanHora.controleUsuario.beanUsuario.usuario}"/>                 
+                    <h:inputText id="txfNomeUsuario"  value="#{controlePrincipal.controleUsuario.beanUsuario.usuario}"/>                 
                 </p:panelGrid>
                 
             </p:panelGrid>

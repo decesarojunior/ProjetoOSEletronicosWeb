@@ -13,11 +13,15 @@ import javax.ejb.Stateless;
  * @author Telmo
  */
 
-@Stateless // bean sem estado    
+@Stateless // EJB sem estado (não armazena estado), uma única instancia PODE atender chamadas de diversos clientes. Não atende chamadas simultâneas. O container pode criar um pool de instancias.      
 public class BeanHora implements Serializable {
     
+    private String data_hora_servidor;
+    
     public BeanHora(){
-        System.out.println("Usou o construtor da classe BeanHora");        
+        System.out.println("Usou o construtor da classe BeanHora");       
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS");
+        this.data_hora_servidor = sdf.format(Calendar.getInstance().getTime());  
     }
     
     @PostConstruct
@@ -29,9 +33,11 @@ public class BeanHora implements Serializable {
     public void destruir(){
         System.out.println("Usou o método destruir da classe BeanHora");
     }    
+
+    public String getData_hora_servidor() {
+        return data_hora_servidor;
+    }
     
-    public String getDataHoraServidor(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS");
-        return sdf.format(Calendar.getInstance().getTime());   
-    } 
+
+    
 }

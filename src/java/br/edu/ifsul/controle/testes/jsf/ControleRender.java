@@ -10,7 +10,7 @@ import javax.faces.view.ViewScoped;
  * @author Telmo
  */
 @ManagedBean(name = "controleRender")
-@ViewScoped        
+@ViewScoped//instancia somente disponível durante a visualização.     
 public class ControleRender implements Serializable {
     
     private Boolean exibir;

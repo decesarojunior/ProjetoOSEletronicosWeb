@@ -12,11 +12,11 @@ import javax.inject.Named;
  * @author Telmo
  */
 
-@Named("controleUsuario")
-@SessionScoped //import javax.enterprise.context.RequestScoped;
+@Named("controleUsuario")//gerenciado pelo Container EJB
+@SessionScoped //import javax.enterprise.context.SessionScoped;
 public class ControleUsuario implements Serializable{
     
-    @EJB
+    @EJB//com estado e tempo pre determinado para ser destruido
     private BeanUsuario beanUsuario;
 
     public ControleUsuario() {
@@ -27,8 +27,5 @@ public class ControleUsuario implements Serializable{
         return beanUsuario;
     }
 
-    public void setBeanUsuario(BeanUsuario beanUsuario) {
-        this.beanUsuario = beanUsuario;
-    }
     
 }

@@ -9,16 +9,17 @@ import javax.ejb.Startup;
 
 /**
  *
- * @author Telmo
+ * @author Telmo Junior
  */
 
-@Singleton
-@Startup///  para inicializar o bean no carregamento da aplicação
+@Singleton//apenas uma instância dessa classe
+@Startup// inicializa o Bean no momento em que a aplicação é carregada
 public class BeanContador implements Serializable  {
     
     private Integer contador;
 
     public BeanContador() {
+        System.out.println("Criou o BeanContador");
         contador = 0;
     }
 

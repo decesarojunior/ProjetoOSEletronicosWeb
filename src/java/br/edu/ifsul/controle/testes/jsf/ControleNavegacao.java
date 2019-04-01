@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
  * @author Telmo Junior
  */
 @ManagedBean(name = "controleNavegacao")
-@RequestScoped//existirá durante a seção
+@RequestScoped//existirá somente durante a requisicao
 public class ControleNavegacao implements Serializable {
     
     private final String ajax = "testes/ajax";

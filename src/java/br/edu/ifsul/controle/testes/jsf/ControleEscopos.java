@@ -18,15 +18,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Telmo
  */
 @ManagedBean(name = "controleEscopos")
-@SessionScoped
+@RequestScoped//instancia disponivel somente durante a requisicao
 public class ControleEscopos implements Serializable{
     
     private String ola;

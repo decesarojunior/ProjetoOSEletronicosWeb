@@ -10,7 +10,7 @@ import javax.faces.view.ViewScoped;
  * @author Telmo Junior
  */
 
-@ManagedBean(name = "controleAjax")//bean (classe no padrao bean) gerenciada
+@ManagedBean(name = "controleAjax")//bean (classe no padrao bean) gerenciada pelo jsf Container Web
 @ViewScoped /// import javax.faces.bean.ViewScoped;
 public class ControleAjax implements Serializable {    
     private String entrada;

@@ -9,13 +9,12 @@ import javax.faces.bean.SessionScoped;
  * @author Telmo
  */
 @ManagedBean(name = "controleFormulario")
-@SessionScoped
+@SessionScoped//escopo de sessao. Instancia disponível durante a sessao do usuario.
 public class ControleFormulario {
     
     private String nome;
     private String funcao;
     private Boolean ativo;
-    
     public ControleFormulario(){
         
     }
