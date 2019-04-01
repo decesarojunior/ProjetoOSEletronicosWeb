@@ -13,15 +13,14 @@
                 <h:inputText value="#{controleAjax.entrada}" id="txtEntrada"/>
                 <h:outputLabel value="Saída"/>
                 <h:inputText value="#{controleAjax.saida}" id="txtSaida"/>
-                <h:outputLabel value="Outros"/>
-                <h:inputText value="pariu" id="txtChina"/>  
+              
                 <f:facet name="footer">
                     <h:commandButton value="Processar com Ajax"
                                      actionListener="#{controleAjax.processar}">
                         <!-- no atributo execute temos a indicacao do que será executado (enviado): @form, @all, @this ou o nome do objeto
                              no atributo render temos o elemento ou grupo que irá receber o resultado da execucao   
                         -->
-                        <f:ajax render="txtSaida txtEntrada" execute="@all"/>
+                        <f:ajax render="txtEntrada" execute="txtEntrada txtSaida"/>
                     </h:commandButton>                                     
                 </f:facet>                    
             </h:panelGrid>            

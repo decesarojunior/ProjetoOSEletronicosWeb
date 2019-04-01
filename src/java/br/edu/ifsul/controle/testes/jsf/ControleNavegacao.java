@@ -1,9 +1,10 @@
 
-package br.edu.ifsul.controle.testes;
+package br.edu.ifsul.controle.testes.jsf;
 
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -12,7 +13,7 @@ import javax.faces.context.FacesContext;
  * @author Telmo Junior
  */
 @ManagedBean(name = "controleNavegacao")
-@SessionScoped//existirá durante a seção
+@RequestScoped//existirá durante a seção
 public class ControleNavegacao implements Serializable {
     
     private final String ajax = "testes/ajax";
@@ -21,6 +22,11 @@ public class ControleNavegacao implements Serializable {
     private final String controlerender = "testes/controlerender";
     private final String escopos = "testes/escopos";    
     private final String formulario = "testes/formulario";
+    
+    
+    
+    
+    private final String calendario = "testes/ejb/calendario";
     
     public ControleNavegacao(){
         
@@ -44,6 +50,10 @@ public class ControleNavegacao implements Serializable {
     
     public String formulario() {
         return formulario;
+    }
+    
+    public String calendario() {
+        return calendario;
     }
     
     public String volta(){

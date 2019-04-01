@@ -12,7 +12,7 @@ Escopo de sessão : dura enquando a sessão estiver ativa. Mostrar abas diferent
 Escopo de visão (para uso com ajax) a instância só dura enquando a tela estiver sendo exibida.
 @ViewScoped
 */
-package br.edu.ifsul.controle.testes;
+package br.edu.ifsul.controle.testes.jsf;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -25,14 +25,14 @@ import javax.faces.bean.ViewScoped;
  *
  * @author Telmo
  */
-@ManagedBean(name = "controleIndex")
+@ManagedBean(name = "controleEscopos")
 @SessionScoped
-public class ControleIndex implements Serializable{
+public class ControleEscopos implements Serializable{
     
     private String ola;
     private Calendar dataSO;
 		
-    public ControleIndex(){
+    public ControleEscopos(){
             ola = "Seja bem vindo ao JSF";
             dataSO = Calendar.getInstance();
     }

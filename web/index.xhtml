@@ -21,16 +21,16 @@
                     quando é utiliza-se o atributo value, o acesso da propriedade é pelo get ou set
                     -->
                     <h:commandLink value="Teste Ajax" action="#{controleNavegacao.ajax}"/>
-                    
-                    
-                    
-                    
-                    
-                    
                     <h:commandLink value="Teste PrimeFaces com Ajax" action="#{controleNavegacao.primefacesajax}"/>
                     <h:commandLink value="Teste Render" action="#{controleNavegacao.controlerender}"/>
                     <h:commandLink value="Teste Escopos" action="#{controleNavegacao.escopos}"/>
                     <h:commandLink value="Formulário" action="#{controleNavegacao.formulario}"/>
+                </h:panelGrid>
+                <h:panelGrid  columns="1">
+                    <f:facet name = "header">
+                        Teste EJB
+                    </f:facet>
+                    <h:commandLink value="Formulário" action="#{controleNavegacao.calendario}"/>
                 </h:panelGrid>
           
         </h:form>

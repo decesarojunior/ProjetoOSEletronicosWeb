@@ -18,7 +18,7 @@
                 <f:facet name="footer">
                     <p:commandButton value="Processar com Ajax"
                                       actionListener="#{controleAjax.processar}"
-                                     update="txtSaida txtEntrada" process="txtEntrada"/>                                         
+                                     update="txtSaida txtEntrada" process="@form"/>                                         
                 </f:facet>                    
             </p:panelGrid>
             <h:commandLink value="Voltar" action="#{controleNavegacao.volta}"/>

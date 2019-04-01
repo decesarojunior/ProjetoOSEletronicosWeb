@@ -1,5 +1,5 @@
 
-package br.edu.ifsul.controle.testes;
+package br.edu.ifsul.controle.testes.jsf;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
