@@ -28,7 +28,7 @@ public class BeanAgendador implements Serializable {
     
     //agendamento de execução do método zeraContador a cada 3 segundos
     //@Schedule(minute = "*/1", hour = "*")
-    @Schedule(minute = "*", hour = "*", second = "3")
+    //@Schedule(minute = "*", hour = "*", second = "*/3")
     public void zeraContador() {
         System.out.println("Vai zerar......: "
                 + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS").format(Calendar.getInstance().getTime()));
