@@ -10,43 +10,45 @@ import javax.persistence.PersistenceContext;
  *
  * @author Telmo
  */
-public class DAOGenerico<TIPO> implements Serializable {
+public class DAOGenerico<TipoGenerics> implements Serializable {
 
-    private List<TIPO> listaObjetos;
-    private List<TIPO> listaTodos;
+    private List<TipoGenerics> listaObjetos;
+    private List<TipoGenerics> listaTodos;
     @PersistenceContext(unitName = "ProjetoOSEletronicosWebPU")
     protected EntityManager em;
-    protected Class classePersistente;    
-
-
-    public DAOGenerico() {
-
+   
+    private final Class<TipoGenerics> classePersistente;
+            
+    public DAOGenerico(Class<TipoGenerics> clazz) {
+       this.classePersistente = clazz;
     }
 
-    public List<TIPO> getListaObjetos() {
-            String jpql = "from " + classePersistente.getSimpleName();      
+    public List<TipoGenerics> getListaObjetos() {
+       
+        String jpql = "from " + classePersistente.getSimpleName();
+        return em.createQuery(jpql).getResultList();
+    }
+
+
+    public List<TipoGenerics> getListaTodos() {
+            String jpql = "from " + classePersistente.getSimpleName();
+            
             return em.createQuery(jpql).getResultList();
     }
 
-
-    public List<TIPO> getListaTodos() {
-            String jpql = "from " + classePersistente.getSimpleName() ;
-            return em.createQuery(jpql).getResultList();
-    }
-
-    public void persist(TIPO obj) throws Exception {
+    public void persist(TipoGenerics obj) throws Exception {
             em.persist(obj);
     }
 
-    public void merge(TIPO obj) throws Exception {
+    public void merge(TipoGenerics obj) throws Exception {
             em.merge(obj);
     }
 
-    public TIPO getObjectById(Object id) throws Exception {
-            return (TIPO) em.find(classePersistente, id);
+    public TipoGenerics getObjectById(Object id) throws Exception {
+            return (TipoGenerics) em.find(classePersistente, id);
     }
 
-    public void remover(TIPO obj) throws Exception {
+    public void remover(TipoGenerics obj) throws Exception {
             obj = em.merge(obj);
             em.remove(obj);
     }
