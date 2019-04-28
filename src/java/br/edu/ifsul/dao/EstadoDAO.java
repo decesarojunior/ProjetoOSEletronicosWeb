@@ -1,6 +1,4 @@
-/*
- * 
- */
+
 package br.edu.ifsul.dao; 
 
 import javax.ejb.Stateful;

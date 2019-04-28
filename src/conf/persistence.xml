@@ -4,6 +4,7 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>    
     <jta-data-source>jdbc/oseletronicos</jta-data-source>
     <class>br.edu.ifsul.modelo.Estado</class>
+    <class>br.edu.ifsul.modelo.Cidade</class>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

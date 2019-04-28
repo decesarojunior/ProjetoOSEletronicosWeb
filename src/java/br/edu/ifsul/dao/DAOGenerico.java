@@ -29,7 +29,11 @@ public class DAOGenerico<TipoGenerics> implements Serializable {
         return em.createQuery(jpql).getResultList();
     }
 
-
+    public TipoGenerics find(Object id){
+     
+          return em.find(classePersistente, id);
+    }
+    
     public List<TipoGenerics> getListaTodos() {
             String jpql = "from " + classePersistente.getSimpleName();
             
