@@ -1,34 +1,31 @@
-  /*
+/*
  * 
  */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converter.ConverterOrdem;
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
 import java.io.Serializable;
+import br.edu.ifsul.modelo.PessoaFisica;
 import javax.ejb.Stateful;
+
 /**
  *
  * @author Telmo
  */
 @Stateful
-public class CidadeDAO extends DAOGenerico<Cidade> implements Serializable {
+public class PessoaFisicaDAO extends DAOGenerico<PessoaFisica> implements Serializable{
     
-    public CidadeDAO(){
+    public PessoaFisicaDAO(){
         
-        super(Cidade.class);   
+        super(PessoaFisica.class);
         
         // inicializar as ordenações possiveis        
-        listaOrdem.add(new Ordem("id", "ID", "="));
-        listaOrdem.add(new Ordem("nome", "Nome", "like"));
+        listaOrdem.add(new Ordem("nomeUsuario", "Nome Usuário", "="));
+        listaOrdem.add(new Ordem("cpf", "CPF", "="));
         // definir qual a ordenação padrão no caso o segundo elemento da lista (indice 1)
         ordemAtual = listaOrdem.get(1);
         // inicializar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
-    
-
-    
     
 }

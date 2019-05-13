@@ -26,7 +26,7 @@ public class ControleCidade implements Serializable {
     }
     
     public String listar(){
-        return "/privado/cidade/crud?faces-redirect=true";
+        return "/privado/cidade/crudcidade?faces-redirect=true";
     }
 
     public void novo(){

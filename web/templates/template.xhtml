@@ -20,10 +20,16 @@
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEstado.listar()}"
-                                        value="Manutenção de Estados"
+                                        value="Manutenção de Estado"
                                         ajax="false"/>
                             <p:menuitem action="#{controleCidade.listar()}"
-                                        value="Manutenção de Cidades"
+                                        value="Manutenção de Cidade"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleUsu.listar()}"
+                                        value="Manutenção de Usuário"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controlePessoaFisica.listar()}"
+                                        value="Manutenção de Pessoa Física"
                                         ajax="false"/>
                         </p:submenu>                     
                     </p:column>

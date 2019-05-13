@@ -1,26 +1,25 @@
-  /*
+/*
  * 
  */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converter.ConverterOrdem;
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.modelo.Usuario;
 import java.io.Serializable;
 import javax.ejb.Stateful;
+
 /**
  *
  * @author Telmo
  */
 @Stateful
-public class CidadeDAO extends DAOGenerico<Cidade> implements Serializable {
+public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable{
     
-    public CidadeDAO(){
-        
-        super(Cidade.class);   
-        
+    public UsuarioDAO(){
+         super(Usuario.class);
+         
         // inicializar as ordenações possiveis        
-        listaOrdem.add(new Ordem("id", "ID", "="));
+        listaOrdem.add(new Ordem("nomeUsuario", "Nome Usuário", "="));
         listaOrdem.add(new Ordem("nome", "Nome", "like"));
         // definir qual a ordenação padrão no caso o segundo elemento da lista (indice 1)
         ordemAtual = listaOrdem.get(1);
@@ -28,7 +27,11 @@ public class CidadeDAO extends DAOGenerico<Cidade> implements Serializable {
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
     
-
-    
+    @Override
+    public Usuario getObjectById(Object id) throws Exception {
+        
+      return (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0);
+                
+    }
     
 }

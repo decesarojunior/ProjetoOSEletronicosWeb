@@ -27,7 +27,7 @@ public class ControleEstado implements Serializable {
         }
 
         public String listar(){
-                return "/privado/estado/listar?faces-redirect=true";
+                return "/privado/estado/crudestado?faces-redirect=true";
         }
 
         public void novo(){

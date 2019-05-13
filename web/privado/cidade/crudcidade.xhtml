@@ -19,6 +19,38 @@
                                  update="formEdicao"
                                  process="@this"
                                  oncomplete="PF('dlg').show();"/>
+                
+                <div align="center">
+                        <p:panelGrid columns="11">
+                                <p:outputLabel value="Ordem: "/>
+                                <p:selectOneMenu value="#{controleCidade.dao.ordemAtual}" id="selectOrdem"
+                                                                 converter="#{controleCidade.dao.converterOrdem}">                            
+                                        <f:selectItems value="#{controleCidade.dao.listaOrdem}"
+                                                       var="ord" itemValue="#{ord.atributo}" itemLabel="#{ord.label}"/>
+                                        <p:ajax update="listagem"/>
+                                </p:selectOneMenu>                         
+                                <p:outputLabel value="Filtro:"/>
+                                <p:inputText value="#{controleCidade.dao.filtro}">
+                                        <p:ajax update="listagem" event="blur"/>
+                                </p:inputText>
+                                <p:commandButton value="Filtrar" update="listagem"/>
+                                <p:outputLabel value="Máximo de Objetos"/>
+                                <p:inputNumber value="#{controleCidade.dao.maximoObjetos}" size="3"
+                                                           thousandSeparator="" decimalSeparator="" decimalPlaces="0">
+                                        <p:ajax event="blur" update="listagem"/> 
+                                </p:inputNumber>
+                                <p:commandButton action="#{controleCidade.dao.primeiro()}" 
+                                                                 title="Primeiro" icon="ui-icon-seek-first" update="listagem"/>
+                                <p:commandButton action="#{controleCidade.dao.anterior()}" 
+                                                                 title="Anterior" icon="ui-icon-seek-prev" 
+                                                                 update="listagem"/>
+                                <p:commandButton action="#{controleCidade.dao.proximo()}" 
+                                                                 title="Proximo" icon="ui-icon-seek-next" update="listagem"/>
+                                <p:commandButton action="#{controleCidade.dao.ultimo()}" 
+                                                                 title="Ultimo" icon="ui-icon-seek-end" update="listagem"/>                          
+                        </p:panelGrid>
+                </div>
+                
                 <p:dataTable value="#{controleCidade.dao.listaObjetos}" var="obj"
                              id="listagem">
                     <f:facet name="footer">
