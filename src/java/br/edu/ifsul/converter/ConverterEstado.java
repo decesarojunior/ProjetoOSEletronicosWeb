@@ -29,7 +29,8 @@ public class ConverterEstado implements Serializable, Converter {
     
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        if (string == null || string.equals("Selecione")){
+        
+        if(string == null || string.equals("Selecione") || string.equals("Selecione um registro")){
             return null;
         }
        

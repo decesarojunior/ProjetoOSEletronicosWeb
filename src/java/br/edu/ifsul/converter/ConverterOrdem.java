@@ -15,7 +15,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Telmo Junior
  */
-@FacesConverter(value = "converterOrdem")
+//@FacesConverter(value = "converterOrdem") - é inicializado manualmente
 public class ConverterOrdem implements Serializable, Converter{
     
     private List<Ordem> listaOrdem;

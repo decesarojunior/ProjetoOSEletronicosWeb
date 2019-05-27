@@ -30,11 +30,19 @@
                                         ajax="false"/>
                             <p:menuitem action="#{controlePessoaFisica.listar()}"
                                         value="Manutenção de Pessoa Física"
-                                        ajax="false"/>
-                        </p:submenu>                     
+                                        ajax="false"/>  
+                            <p:menuitem action="#{controleEquipamento.listar()}"
+                                        value="Manutenção de Equipamentos"
+                                        ajax="false"/>                                                
+                        </p:submenu> 
+                        <p:submenu label="Negócios">                            
+                            <p:menuitem action="#{controleOrdemServico.listar()}"
+                                value="Ordens de Serviço"
+                                ajax="false"/>      
+                        </p:submenu>
                     </p:column>
                 </p:submenu>   
-                
+               
             </p:megaMenu>            
         </h:form>
         <ui:insert name="conteudo">

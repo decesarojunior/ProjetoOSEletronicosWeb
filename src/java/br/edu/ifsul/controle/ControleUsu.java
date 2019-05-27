@@ -25,6 +25,8 @@ public class ControleUsu implements  Serializable{
     
     private Usuario objeto;
     
+    private Boolean isEdit = false;
+    
     public ControleUsu(){                
     }
     
@@ -33,7 +35,8 @@ public class ControleUsu implements  Serializable{
     }
     
     public void novo(){
-        setObjeto(new Usuario());      
+        setObjeto(new Usuario());
+        isEdit = false;
     }
 
     public Usuario getObjeto() {
@@ -53,6 +56,7 @@ public class ControleUsu implements  Serializable{
                     System.out.println("ControleUsu - altera : "+id);
                     setObjeto(dao.getObjectById(id));            
                     System.out.println("ControleUsu - encontrou : "+getObjeto());
+                    isEdit = true;
              } catch (Exception e){
                      Util.mensagemErro("Erro ao recuperar objeto: " + 
                                      Util.getMensagemErro(e));
@@ -71,10 +75,16 @@ public class ControleUsu implements  Serializable{
     }
 
     public void salvar(){
-            try {
-                    //id nesse caso não é gerado pelo BD
-                    dao.persist(getObjeto());
-                    Util.mensagemInformacao("Objeto persistido com sucesso!");            
+        try {
+            
+                if(!getIsEdit()){
+                    dao.persist(objeto);
+                    Util.mensagemInformacao("Objeto inserido com sucesso!");
+                }else{
+                    dao.merge(objeto);
+                    Util.mensagemInformacao("Objeto alterado com sucesso!");
+                }
+                    
             } catch(Exception e){
                     Util.mensagemErro("Erro ao persistir objeto: " + 
                                     Util.getMensagemErro(e));
@@ -90,4 +100,10 @@ public class ControleUsu implements  Serializable{
         }
 
     }
+
+    public Boolean getIsEdit() {
+        return isEdit;
+    }
+    
+    
 }

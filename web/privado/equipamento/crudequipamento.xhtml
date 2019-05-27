@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
 
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -8,11 +10,11 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Manutenção de Cidades</ui:define>
+        <ui:define name="titulo">Manutenção de Equipamentos</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem" prependId="false">
                 <p:growl/>
-                <p:commandButton value="Novo" actionListener="#{controleCidade.novo()}"
+                <p:commandButton value="Novo" actionListener="#{controleEquipamento.novo()}"
                                  icon="ui-icon-plus"
                                  update="formEdicao"
                                  process="@this"
@@ -21,35 +23,35 @@
                 <div align="center">
                         <p:panelGrid columns="11">
                                 <p:outputLabel value="Ordem: "/>
-                                <p:selectOneMenu value="#{controleCidade.dao.ordemAtual}" id="selectOrdem"
-                                                                 converter="#{controleCidade.dao.converterOrdem}">                            
-                                        <f:selectItems value="#{controleCidade.dao.listaOrdem}"
+                                <p:selectOneMenu value="#{controleEquipamento.dao.ordemAtual}" id="selectOrdem"
+                                                                 converter="#{controleEquipamento.dao.converterOrdem}">                            
+                                        <f:selectItems value="#{controleEquipamento.dao.listaOrdem}"
                                                        var="ord" itemValue="#{ord.atributo}" itemLabel="#{ord.label}"/>
                                         <p:ajax update="listagem"/>
                                 </p:selectOneMenu>                         
                                 <p:outputLabel value="Filtro:"/>
-                                <p:inputText value="#{controleCidade.dao.filtro}">
+                                <p:inputText value="#{controleEquipamento.dao.filtro}">
                                         <p:ajax update="listagem" event="blur"/>
                                 </p:inputText>
                                 <p:commandButton value="Filtrar" update="listagem"/>
                                 <p:outputLabel value="Máximo de Objetos"/>
-                                <p:inputNumber value="#{controleCidade.dao.maximoObjetos}" size="3"
+                                <p:inputNumber value="#{controleEquipamento.dao.maximoObjetos}" size="3"
                                                            thousandSeparator="" decimalSeparator="" decimalPlaces="0">
                                         <p:ajax event="blur" update="listagem"/> 
                                 </p:inputNumber>
-                                <p:commandButton action="#{controleCidade.dao.primeiro()}" 
+                                <p:commandButton action="#{controleEquipamento.dao.primeiro()}" 
                                                                  title="Primeiro" icon="ui-icon-seek-first" update="listagem"/>
-                                <p:commandButton action="#{controleCidade.dao.anterior()}" 
+                                <p:commandButton action="#{controleEquipamento.dao.anterior()}" 
                                                                  title="Anterior" icon="ui-icon-seek-prev" 
                                                                  update="listagem"/>
-                                <p:commandButton action="#{controleCidade.dao.proximo()}" 
+                                <p:commandButton action="#{controleEquipamento.dao.proximo()}" 
                                                                  title="Proximo" icon="ui-icon-seek-next" update="listagem"/>
-                                <p:commandButton action="#{controleCidade.dao.ultimo()}" 
+                                <p:commandButton action="#{controleEquipamento.dao.ultimo()}" 
                                                                  title="Ultimo" icon="ui-icon-seek-end" update="listagem"/>                          
                         </p:panelGrid>
                 </div>
                 
-                <p:dataTable value="#{controleCidade.dao.listaObjetos}" var="obj"
+                <p:dataTable value="#{controleEquipamento.dao.listaObjetos}" var="obj"
                              id="listagem">
                     <f:facet name="footer">
                         <p:outputLabel value=""/>
@@ -58,21 +60,21 @@
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}"/>
                     </p:column>
-                    <p:column headerText="Nome">
-                        <p:outputLabel value="#{obj.nome}"/>
+                    <p:column headerText="Descrição">
+                        <p:outputLabel value="#{obj.descricao}"/>
                     </p:column> 
-                    <p:column headerText="UF">
-                        <p:outputLabel value="#{obj.estado.nome}"/>
+                    <p:column headerText="Marca">
+                        <p:outputLabel value="#{obj.marca.nome}"/>
                     </p:column>                     
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleCidade.alterar(obj.id)}"
+                            <p:commandButton actionListener="#{controleEquipamento.alterar(obj.id)}"
                                              icon="ui-icon-pencil"
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
                                              oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleCidade.excluir(obj.id)}"
+                            <p:commandButton actionListener="#{controleEquipamento.excluir(obj.id)}"
                                              icon="ui-icon-trash"
                                              update="@form"
                                              process="@this"
@@ -90,18 +92,22 @@
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleCidade.objeto.id}" size="5"
+                            <p:inputText value="#{controleEquipamento.objeto.id}" size="5"
                                          readonly="true"/>
-                            <p:outputLabel value="Nome" for="txtNome"/>
-                            <p:inputText value="#{controleCidade.objeto.nome}"
+                            <p:outputLabel value="Descrição" for="txtNome"/>
+                            <p:inputText value="#{controleEquipamento.objeto.descricao}"
                                          size="50" maxlength="50" id="txtNome"
                                          placeholder="Obrigatório"/>
-                                    <p:outputLabel for="estado" value="Estado:" />
-                                    <p:selectOneMenu id="estado" value="#{controleCidade.objeto.estado}" effect="fold" editable="false">
-                                        <f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
-                                        <f:selectItems value="#{controleEstado.dao.listaTodos}"  var="est" itemLabel="#{est.nome}" />
-                                        <f:converter binding="#{converterEstado}" />
-                                    </p:selectOneMenu>
+                            <p:outputLabel value="Número de Série" for="txtNumeroSerie"/>
+                            <p:inputText value="#{controleEquipamento.objeto.numeroSerie}"
+                                         size="50" maxlength="50" id="txtNumeroSerie"
+                                         placeholder="Obrigatório"/>                            
+                            <p:outputLabel for="marca" value="Marca:" />
+                            <p:selectOneMenu id="marca" value="#{controleEquipamento.objeto.marca}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+                                <f:selectItems value="#{controleMarca.dao.listaTodos}"  var="est" itemLabel="#{est.nome}" />
+                                <f:converter binding="#{converterMarca}" />
+                            </p:selectOneMenu>
                         </p:panelGrid>
                     </div>
 
@@ -109,7 +115,7 @@
                         <div align="center">
                             <p:commandButton value="Salvar"
                                              icon="ui-icon-disk"
-                                             actionListener="#{controleCidade.salvar()}"
+                                             actionListener="#{controleEquipamento.salvar()}"
                                              update="formEdicao formListagem"
                                              oncomplete="if(!args.validationFailed) {PF('dlg').hide();}"/>                                             
                         </div>

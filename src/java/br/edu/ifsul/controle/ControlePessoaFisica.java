@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import br.edu.ifsul.modelo.PessoaFisica;
 import br.edu.ifsul.util.Util;
+import java.util.Calendar;
 import javax.ejb.EJB;
 
 /**
@@ -21,6 +22,8 @@ public class ControlePessoaFisica implements Serializable {
     private PessoaFisicaDAO dao;
     
     private PessoaFisica objeto;
+    
+    private Boolean isEdit = false;
     
     public ControlePessoaFisica(){
         
@@ -43,12 +46,15 @@ public class ControlePessoaFisica implements Serializable {
     }
     
     public void novo(){
-        setObjeto(new PessoaFisica());      
+        setObjeto(new PessoaFisica());   
+        getObjeto().setDataCadastro(Calendar.getInstance());
+        isEdit = false;
     }
     
     public void alterar(Object id){
             try {
-                    setObjeto(dao.getObjectById(id));            
+                    setObjeto(dao.getObjectById(id));   
+                    isEdit = true;
             } catch (Exception e){
                     Util.mensagemErro("Erro ao recuperar objeto: " + 
                                     Util.getMensagemErro(e));
@@ -68,16 +74,27 @@ public class ControlePessoaFisica implements Serializable {
 
     public void salvar(){
         try {
-                if (getObjeto().getNomeUsuario() == null){
-                        dao.persist(getObjeto());
-                } else {
-                        dao.merge(getObjeto());
+            
+                if(!getIsEdit()){
+                    dao.persist(objeto);
+                    Util.mensagemInformacao("Objeto inserido com sucesso!");
+                }else{
+                    dao.merge(objeto);
+                    Util.mensagemInformacao("Objeto alterado com sucesso!");
                 }
-                Util.mensagemInformacao("Objeto persistido com sucesso!");            
+                           
         } catch(Exception e){
                 Util.mensagemErro("Erro ao persistir objeto: " + 
                                 Util.getMensagemErro(e));
         }
     }
+
+    public Boolean getIsEdit() {
+        return isEdit;
+    }
+    
+    
     
 }
+
+
