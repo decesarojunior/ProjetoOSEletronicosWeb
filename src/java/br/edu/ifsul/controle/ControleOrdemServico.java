@@ -5,13 +5,21 @@ package br.edu.ifsul.controle;
 import br.edu.ifsul.dao.EquipamentoDAO;
 import br.edu.ifsul.dao.ServicoDAO;
 import br.edu.ifsul.dao.OrdemServicoDAO;
+import br.edu.ifsul.modelo.Foto;
 import br.edu.ifsul.modelo.ItemServico;
 import br.edu.ifsul.modelo.OrdemServico;
 import br.edu.ifsul.util.Util;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -19,7 +27,7 @@ import javax.inject.Named;
  */
 
 @Named(value = "controleOrdemServico")
-@ViewScoped
+@SessionScoped
 public class ControleOrdemServico implements Serializable {
     
     @EJB
@@ -34,17 +42,20 @@ public class ControleOrdemServico implements Serializable {
     private ServicoDAO servicoDao;
     
     private ItemServico itemServico;
+    
     private Boolean novoItemServico;
 	
-  
+    private Foto foto;
     
     public ControleOrdemServico(){
         
     }
     
     public void novoItemServico(){
+        
         setItemServico(new ItemServico());
         novoItemServico = true;
+        System.out.println("itemServico: "+getItemServico());
     }    
     public void alterarItemServico(int index){
         setItemServico(objeto.getItemServicos().get(index));
@@ -61,13 +72,76 @@ public class ControleOrdemServico implements Serializable {
         Util.mensagemInformacao("Serviço removido com sucesso");
     }
 
+    public void gerarParcelas(){
+        objeto.getContasReceber().clear();
+        objeto.gerarContasReceber();
+    }
+    
+        public void novaFoto() {
+        setFoto(new Foto());
+    }
+
+    public void salvarFoto() {
+        objeto.adicionarFoto(getFoto());
+        Util.mensagemInformacao("Foto adicionada com sucesso!");
+    }
+
+    public void removerFoto(int index) {
+        objeto.removerFoto(index);
+        Util.mensagemInformacao("Foto removida com sucesso!");
+    }
+
+    public void enviarFoto(FileUploadEvent event) {
+        try {
+            getFoto().setArquivo(event.getFile().getContents());
+            String nomeFoto = event.getFile().getFileName();
+            nomeFoto = nomeFoto.replaceAll("[ ]", "_");
+            getFoto().setNomeFoto(nomeFoto);
+            Util.mensagemInformacao("Foto enviada com sucesso!");
+        } catch (Exception e) {
+            Util.mensagemErro("Erro ao enviar foto: " + Util.getMensagemErro(e));
+        }
+    }
+
+    public void downloadFoto(int index) {
+        setFoto(objeto.getFotos().get(index));
+        byte[] download = (byte[]) getFoto().getArquivo();
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-Disposition", "attachment; filename=" + getFoto().getNomeFoto());
+        response.setContentLength(download.length);
+        try {
+            response.setContentType("application/octet-stream");
+            response.getOutputStream().write(download);
+            response.getOutputStream().flush();
+            FacesContext.getCurrentInstance().responseComplete();
+        } catch (Exception e) {
+            Util.mensagemErro("Erro no download da foto: " + Util.getMensagemErro(e));
+        }
+    } 
+        
+    public void visualizarFoto(int index) {
+        setFoto(objeto.getFotos().get(index));
+    }
+
+    public StreamedContent getImagemDinamica() {
+        if (getFoto() != null) {
+            return new DefaultStreamedContent(new ByteArrayInputStream(getFoto().getArquivo()), "");
+        } else {
+            return new DefaultStreamedContent();
+        }
+    }
     
     public String listar(){
             return "/privado/ordemservico/crudordemservico?faces-redirect=true";
     }
 
     public void novo(){
-            objeto = new OrdemServico();        
+        
+            objeto = new OrdemServico();  
+            objeto.setFotos(new ArrayList());
+            objeto.setItemServicos(new ArrayList());
+            objeto.setItemProdutos(new ArrayList());
+            objeto.setContasReceber(new ArrayList());
     }
 
     public void alterar(Object id){
@@ -139,6 +213,14 @@ public class ControleOrdemServico implements Serializable {
 
     public ServicoDAO getServicoDao() {
         return servicoDao;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
     
     

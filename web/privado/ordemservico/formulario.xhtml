@@ -138,8 +138,77 @@
 
                     </p:tab>  
                     <p:tab title="Parcelas">
+                        
+                            <p:dataTable id="listagemParcelas"
+                                     value="#{controleOrdemServico.objeto.contasReceber}"
+                                     var="con" emptyMessage="Nenhuma parcela gerada">
+                                <f:facet name="header">
+                                        <p:commandButton value="Gerar parcelas"
+                                                    actionListener="#{controleOrdemServico.gerarParcelas()}"
+                                                    update="listagemParcelas"/>
+                                </f:facet>
+                                <p:column headerText="Numero">
+                                        <p:outputLabel value="#{con.id.numeroParcela}"/>
+                                </p:column>
+                                <p:column headerText="Valor">
+                                        <p:outputLabel value="#{con.valor}">
+                                                <f:convertNumber pattern="R$ 0.00"/>
+                                        </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Vencimento">
+                                        <p:outputLabel value="#{con.vencimento}">
+                                                <f:converter binding="#{converterCalendar}" />
+                                        </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Valor Pago">
+                                        <p:outputLabel value="#{con.valorPago}">
+                                                <f:convertNumber pattern="R$ 0.00"/>
+                                        </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Data Pagamento">
+                                        <p:outputLabel value="#{con.dataPagamento}">
+                                                <f:converter binding="#{converterCalendar}" />
+                                        </p:outputLabel>
+                                </p:column>                                                                          
+                            </p:dataTable>	
 
                     </p:tab>  
+                    
+                    <p:tab title="Fotos">
+                            <p:commandButton value="Novo arquivo" icon="ui-icon-plus"
+                                                             actionListener="#{controleOrdemServico.novaFoto()}"
+                                                             update="formEdicaoFoto"
+                                                             process="@this"
+                                                             oncomplete="PF('dlgFoto').show();"/>
+                            <p:dataTable value="#{controleOrdemServico.objeto.fotos}" var="fot" id="listaFotos" 
+                                                     rowIndexVar="idxFot">
+                                    <p:column headerText="Descrição" width="30%">
+                                            <p:outputLabel value="#{fot.descricao}"/>
+                                    </p:column>
+                                    <p:column headerText="Nome do arquivo" width="50%">
+                                            <p:commandLink action="#{controleOrdemServico.downloadFoto(idxFot)}"
+                                                                       value="#{fot.nomeFoto}" ajax="false"/> 
+                                    </p:column>                                    
+                                    <p:column headerText="Ações" width="15%">
+                                            <div align="center">
+                                                    <p:commandButton actionListener="#{controleOrdemServico.removerFoto(idxFot)}"
+                                                                                     icon="ui-icon-trash"
+                                                                                     update="listaFotos growl"
+                                                                                     process="@this"
+                                                                                     title="Remover arquivo"
+                                                                                     onclick="if (!confirm('Confirma a exclusão?'))
+                                                                                                             return false"/>
+                                                    
+                                                    <p:commandButton actionListener="#{controleOrdemServico.visualizarFoto(idxFot)}"
+                                                                                    icon="ui-icon-zoomin"
+                                                                                    update="formVerFoto"
+                                                                                    process="@this"
+                                                                                    title="Visualizar foto"
+                                                                                    oncomplete="PF('dlgVerFoto').show();"/>    
+                                            </div>
+                                    </p:column>                                    
+                            </p:dataTable>
+                    </p:tab> 
 
                     </p:tabView>
                     <p:panel>
@@ -196,4 +265,49 @@
                 </h:form>
                 <ui:include src="/templates/ajaxstatus.xhtml"/>
         </p:dialog> 
+    
+        <p:dialog header="Nova foto" widgetVar="dlgFoto" resizable="false"
+                 modal="true" width="60%" height="100%" position="top" >
+           <h:form id="formEdicaoFoto" prependId="false">                    
+
+               <div align="center">
+                   <p:panelGrid columns="2">
+                       <p:outputLabel value="Descrição" for="txtDescricao"/>
+                       <p:inputText value="#{controleOrdemServico.foto.descricao}"
+                                    size="50" maxlength="50" id="txtDescricao"
+                                    placeholder="Obrigatório"/>  
+                       <p:outputLabel for="nomeArquivo" value="Arquivo:" />
+                       <p:column  colspan="2" rowspan="1">
+                           <p:inputText id="nomeArquivo"  
+                                        value="#{controleOrdemServico.foto.nomeFoto}" readonly="true" size="100"/>                                                
+                           <p:fileUpload id="uploadVersao"  
+                                         mode="advanced"  
+                                         update="growl nomeArquivo"  
+                                         auto="true"   
+                                         label="Selecionar"
+                                         fileUploadListener="#{controleOrdemServico.enviarFoto}" />
+                       </p:column>                                       
+                   </p:panelGrid>
+               </div>
+
+               <p:panel>
+                   <div align="center">
+                       <p:commandButton value="Salvar"
+                                        icon="ui-icon-disk"
+                                        actionListener="#{controleOrdemServico.salvarFoto()}"
+                                        update="tab:listaFotos growl"
+                                        oncomplete="if(!args.validationFailed) {PF('dlgFoto').hide();}"/>                                             
+                   </div>
+               </p:panel>
+           </h:form>
+       </p:dialog> 
+    
+        <p:dialog header="Visualização" widgetVar="dlgVerFoto" resizable="false"
+              modal="true" width="100%" height="100%" position="top" >
+            <h:form id="formVerFoto" prependId="false">                    
+                <p:graphicImage value="#{controleOrdemServico.imagemDinamica}"
+                                             cache="false" />
+            </h:form>
+        </p:dialog> 
+    
 </html>

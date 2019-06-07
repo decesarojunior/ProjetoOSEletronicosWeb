@@ -12,6 +12,7 @@ public class Util {
 		
     public static String getMensagemErro(Exception e){
             while (e.getCause() != null){
+                if(e.getCause() instanceof Exception) //pode ser java.lang.StackOverflowError
                     e = (Exception) e.getCause();
             }
             String retorno = e.getMessage();

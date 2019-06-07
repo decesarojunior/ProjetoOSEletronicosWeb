@@ -26,12 +26,12 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable{
         // inicializar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
-    
+    /*
     @Override
     public Usuario getObjectById(Object id) throws Exception {
         
       return (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0);
                 
     }
-    
+    */
 }
