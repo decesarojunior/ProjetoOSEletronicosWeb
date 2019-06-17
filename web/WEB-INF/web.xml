@@ -29,4 +29,68 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+        
+    <security-constraint>
+        <display-name>SC_ADMINISTRADOR</display-name>
+        <web-resource-collection>
+            <web-resource-name>administrador</web-resource-name>
+            <description/>
+            <url-pattern>/privado/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>PUT</http-method>
+            <http-method>POST</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMINISTRADOR</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>SC_USUARIO</display-name>
+        <web-resource-collection>
+            <web-resource-name>usuario</web-resource-name>
+            <description/>
+            <url-pattern>/privado/ordemservico/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>PUT</http-method>
+            <http-method>POST</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USUARIO</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+
+    <!-- configuração de log-in basico -->
+    <!--login-config>
+            <auth-method>BASIC</auth-method>
+            <realm-name>OSEletronicos-Realm</realm-name>
+    </login-config -->
+    
+    <!-- configuração do login com formularios do JSF -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>OSEletronicos-Realm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/loginerror.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>    
+    <!-- Papéis de segurança -->
+    <security-role>
+        <description>Administrador</description>        
+        <role-name>ADMINISTRADOR</role-name>
+    </security-role>    
+    <security-role>
+        <description>Usuario</description>        
+        <role-name>USUARIO</role-name>
+    </security-role>
+    <security-role>
+        <description>Cliente</description>        
+        <role-name>CLIENTE</role-name>
+    </security-role>    
 </web-app>

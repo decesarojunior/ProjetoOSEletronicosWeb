@@ -3,5 +3,17 @@
 GlassFish Application Server 3.1 Servlet 3.0//EN"
         "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd"> 
 <glassfish-web-app>
-    <context-root>/oseletronicos</context-root>
+    <context-root>/oseletronicos</context-root>    
+    <security-role-mapping>
+            <role-name>USUARIO</role-name>        
+            <group-name>USUARIO</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+            <role-name>ADMINISTRADOR</role-name>
+            <group-name>ADMINISTRADOR</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+            <role-name>CLIENTE</role-name>
+            <group-name>CLIENTE</group-name>
+    </security-role-mapping>                 
 </glassfish-web-app>

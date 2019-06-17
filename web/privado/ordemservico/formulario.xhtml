@@ -216,6 +216,7 @@
                             <p:commandButton value="Salvar"
                                              icon="ui-icon-disk"
                                              actionListener="#{controleOrdemServico.salvar()}"
+                                                      rendered="#{p:ifGranted('ADMINISTRADOR')}"
                                              update="formEdicao formListagem"
                                              oncomplete="if(!args.validationFailed) {PF('dlg').hide();}"/>                                             
                         </div>
